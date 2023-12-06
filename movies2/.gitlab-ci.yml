@@ -1,0 +1,71 @@
+image: node:latest
+
+# Pipeline
+stages:
+  - install
+  - build
+#  - startEmulator
+  - test
+#  - componentTest
+#  - endEmulator
+
+variables:
+   npm_config_cache: "$CI_PROJECT_DIR/.npm"
+   CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+cache:
+   key:
+     files:
+        - package.json
+   paths:
+      - .npm
+      - cache/Cypress
+      - node_modules
+      - build
+      
+# Jobs 
+install_dependencies:
+  stage: install
+  script:
+    - npm ci
+  artifacts:
+    paths:
+      - node_modules/
+
+bundle_app:
+  stage: build
+  script:
+    - npm run build
+
+#start_firebase_emulator:
+#  stage: startEmulator
+#  script:
+#    - npm install -g firebase-tools
+#    - firebase emulators:start --only auth --project $FIREBASE_PROJECT_ID
+
+#end_firebase_emulator:
+#  stage: endEmulator
+#  script:
+#    - firebase emulators:stop
+
+e2etest:
+# Node docker image with Cypress and Chrome pre-installed
+  stage: test
+  only:
+    - main
+  image: cypress/browsers:node18.12.0-chrome106-ff106
+  script:
+    - echo "Run tests in headless mode"
+    - npx serve -s ./build  -l 3000  &
+    - npx cypress run --browser chrome
+
+componentTest:
+# Node docker image with Cypress and Chrome pre-installed
+  stage: componentTest
+  only:
+    - main
+  image: cypress/browsers:node18.12.0-chrome106-ff106
+  script:
+    - echo "Run component tests in headless mode"
+    - npx serve -s ./build  -l 3000  &
+    - npx cypress run --component --browser chrome

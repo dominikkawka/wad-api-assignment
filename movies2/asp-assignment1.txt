@@ -1,0 +1,4 @@
+Video: https://youtu.be/CIAHc_Qc4qs
+
+For the login/signup tests, the firebase emulator has to be turned on, which can be done by:
+firebase emulators:start --only auth --project react-movie-labs-dk
