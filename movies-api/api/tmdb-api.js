@@ -44,6 +44,30 @@ export const getGenres = async () => {
     }
 };
 
+export const getMovieImages = async (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+  });
+  };
+
+  export const getMovieReviews = async (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.TMDB_KEY}`
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        return json.results;
+      });
+  };  
+
 export const getUpcomingReleases = async (page) => {
     try {
         const response = await fetch(
@@ -92,6 +116,22 @@ export const getTopRatedReleases = async (page) => {
     }
 };
 
+export const getNowPlaying = async (page) => {
+    try {
+        const response = await fetch(
+            `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.TMDB_KEY}&page=${page}`
+        );
+
+        if (!response.ok) {
+            throw new Error(response.json().message);
+        }
+
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const getMovieRecommendations = (id) => {
     return fetch(
       `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.TMDB_KEY}`
@@ -105,3 +145,60 @@ export const getMovieRecommendations = (id) => {
       throw error
     });
   };
+
+export const getMovieSimilar = (id) => {
+return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.TMDB_KEY}`
+).then((response) => {
+    if (!response.ok) {
+    throw new Error(response.json().message);
+    }
+    return response.json();
+    })
+    .catch((error) => {
+        throw error
+    });
+    };
+
+
+export const getMovieCredits = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+    });
+  };
+  
+  export const getPerson = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+    });
+  };      
+
+  export const getPersonCredits = (id) => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.TMDB_KEY}`
+    ).then((response) => {
+      if (!response.ok) {
+        throw new Error(response.json().message);
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error
+    });
+  };    

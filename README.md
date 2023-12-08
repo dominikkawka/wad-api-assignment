@@ -7,12 +7,19 @@ Name: Dominik Kawka
 A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** (or modifications to existing features)
 
  + `/tmdb/movie/:id`: Get movie by id
+ + `/tmdb/movieImages/:id`: Get movie images
+ + `/tmdb/movieReviews/:id`: Get movie reviews
  + `/tmdb/movie/:id/recommendations`: Get movie recommendations
+ + `/tmdb/movie/:id/similar`: Get similar movie 
  + `/tmdb/discover/:page`: Gets discover page
  + `/tmdb/popular/:page`: Gets popular releases
  + `/tmdb/topRated/:page`: Gets top rated releases
- + Feature 3 
- + etc
+ + `/tmdb/upcoming/:page`: Gets upcoming releases
+ + `/tmdb/nowPlaying/:page`: Gets movies currently playing
+ + `/tmdb/movie/:id/credits`: Get movie credits
+ + `/tmdb/person/:id`: Get person id
+ + `/tmdb/person/:id/credits`: Get person credits
+ + `:id/reviews`: get movie reviews (auth token needed)
 
 ## Setup requirements.
 
