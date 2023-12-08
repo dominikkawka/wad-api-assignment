@@ -1,7 +1,10 @@
 import movieModel from './movieModel';
 import asyncHandler from 'express-async-handler';
 import express from 'express';
-import { getUpcomingMovies, getGenres } from '../tmdb-api';
+import { getMovies, getMovie, getGenres, 
+    getUpcomingReleases, getPopularReleases, getTopRatedReleases, 
+    getMovieRecommendations } 
+    from '../tmdb-api';
 
 const router = express.Router();
 
@@ -26,7 +29,6 @@ router.get('/', asyncHandler(async (req, res) => {
     res.status(200).json(returnObject);
 }));
 
-// Get movie details
 router.get('/:id', asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id);
     const movie = await movieModel.findByMovieDBId(id);
@@ -37,9 +39,34 @@ router.get('/:id', asyncHandler(async (req, res) => {
     }
 }));
 
-router.get('/tmdb/upcoming', asyncHandler(async (req, res) => {
-    const upcomingMovies = await getUpcomingMovies();
-    res.status(200).json(upcomingMovies);
+router.get('/tmdb/discover/:page', asyncHandler(async (req, res) => {
+    const movies = await getMovies(req.params.page);
+    res.status(200).json(movies);
+}));
+
+router.get('/tmdb/movie/:id', asyncHandler(async (req, res) => {
+    const movie = await getMovie(req.params.id);
+    res.status(200).json(movie);
+}));
+
+router.get('/tmdb/movie/:id/recommendations', asyncHandler(async (req, res) => {
+    const movieRecommendations = await getMovieRecommendations(req.params.id);
+    res.status(200).json(movieRecommendations);
+}));
+
+router.get('/tmdb/upcoming/:page', asyncHandler(async (req, res) => {
+    const upcomingReleases = await getUpcomingReleases(req.params.page);
+    res.status(200).json(upcomingReleases);
+}));
+
+router.get('/tmdb/popular/:page', asyncHandler(async (req, res) => {
+    const popularReleases = await getPopularReleases(req.params.page);
+    res.status(200).json(popularReleases);
+}));
+
+router.get('/tmdb/topRated/:page', asyncHandler(async (req, res) => {
+    const topRatedReleases = await getTopRatedReleases(req.params.page);
+    res.status(200).json(topRatedReleases);
 }));
 
 router.get('/tmdb/genres', asyncHandler(async (req, res) => {
