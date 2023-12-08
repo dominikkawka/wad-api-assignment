@@ -1,6 +1,6 @@
   export const getMovies = async (page) => {
     return fetch(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=${page}`
+      `http://localhost:8080/api/movies/tmdb/discover/${page}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -10,14 +10,14 @@
     .catch((error) => {
       throw error
     });
-  };
+  }; 
   
   export const getMovie = async (args) => {
     //console.log(args)
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movie/${id}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -31,7 +31,7 @@
 
   export const getGenres = async () => {
     return fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US`
+      `http://localhost:8080/api/movies/tmdb/genres`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -43,11 +43,11 @@
    });
   };
 
-  export const getMovieImages = ({ queryKey }) => {
+  export const getMovieImages = async ({ queryKey }) => {
     const [, idPart] = queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/images?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movieImages/${id}`
     ).then( (response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -60,9 +60,11 @@
    });
   };
 
-  export const getMovieReviews = (id) => {
+  //http://localhost:8080/api/movies/tmdb/movieReviews/${id} fails/ doesn't display movies
+  // it seems its because when this is called it puts it inside of an array. 
+  export const getMovieReviews = async (id) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movieReviews/${id}`
     )
       .then((res) => res.json())
       .then((json) => {
@@ -72,7 +74,7 @@
 
   export const getUpcomingReleases = async (page) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+      `http://localhost:8080/api/movies/tmdb/upcoming/${page}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -86,7 +88,7 @@
 
   export const getPopularReleases = async (page) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+      `http://localhost:8080/api/movies/tmdb/popular/${page}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -100,7 +102,7 @@
 
   export const getTopRatedReleases = async (page) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+      `http://localhost:8080/api/movies/tmdb/topRated/${page}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -114,7 +116,7 @@
 
   export const getNowPlaying = async (page) => {
     return fetch(
-      `https://api.themoviedb.org/3/movie/now_playing?api_key=${process.env.REACT_APP_TMDB_KEY}&page=${page}`
+      `http://localhost:8080/api/movies/tmdb/nowPlaying/${page}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -125,13 +127,13 @@
       throw error
     });
   }
-
-  export const getMovieRecommendations = (args) => {
+  
+  export const getMovieRecommendations = async (args) => {
     //console.log(args)
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movie/${id}/recommendations`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -148,7 +150,7 @@
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movie/${id}/similar`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -160,11 +162,11 @@
     });
   };
 
-  export const getMovieCredits = (args) => {
+  export const getMovieCredits = async (args) => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/movie/${id}/credits`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -176,12 +178,12 @@
     });
   };
 
-  export const getPerson = (args) => {
+  export const getPerson = async (args) => {
     //console.log(args)
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/person/${id}?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/person/${id}`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
@@ -193,11 +195,11 @@
   });
   };
 
-  export const getPersonCredits = (args) => {
+  export const getPersonCredits = async (args) => {
     const [, idPart] = args.queryKey;
     const { id } = idPart;
     return fetch(
-      `https://api.themoviedb.org/3/person/${id}/movie_credits?api_key=${process.env.REACT_APP_TMDB_KEY}`
+      `http://localhost:8080/api/movies/tmdb/person/${id}/credits`
     ).then((response) => {
       if (!response.ok) {
         throw new Error(response.json().message);
