@@ -20,6 +20,7 @@ A bullet-point list of the ADDITIONAL features you have implemented in the API *
  + `/tmdb/person/:id`: Get person id
  + `/tmdb/person/:id/credits`: Get person credits
  + `:id/reviews`: get movie reviews (auth token needed)
+ + `:id/reviews`: get AND post movie reviews (auth token needed) (WIP)
 
 ## Setup requirements.
 
