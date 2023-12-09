@@ -12,23 +12,6 @@ import { styled } from '@mui/material/styles';
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
-import { connectAuthEmulator, onAuthStateChanged} from "firebase/auth"
-import auth from "../../firebase";
-
-connectAuthEmulator(auth, "http://localhost:9099")
-
-const monitorAuthState = async () => {
-  onAuthStateChanged(auth, user => {
-     if (user) {
-        let userEmail = user.email
-        //console.log(userEmail)
-        return userEmail
-     } else {
-        //console.error("user not logged in")
-      }
-  })
-  }
-  monitorAuthState() 
 
 const Offset = styled('div')(({ theme }) => theme.mixins.toolbar);
 
