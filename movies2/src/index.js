@@ -5,6 +5,10 @@ import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from 'react-query/devtools';
 import SiteHeader from './components/siteHeader'
 import MoviesContextProvider from "./contexts/moviesContext";
+import ProtectedRoutes from "./protectedRoutes";
+
+import LoginPage from "./pages/loginPage";
+import SignUpPage from "./pages/signUpPage";
 
 const HomePage = lazy(() => import("./pages/homePage"));
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
@@ -22,8 +26,6 @@ const MovieSimilarPage = lazy(() => import("./pages/movieSimilarPage"));
 const PersonPage = lazy(() => import("./pages/personDetailsPage"));
 const PersonCreditsPage = lazy(() => import("./pages/personCreditsPage"));
 
-const LoginPage = lazy(() => import("./pages/loginPage"));
-const CreateAccountPage = lazy(() => import("./pages/createAccountPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -49,19 +51,22 @@ const App = () => {
         <Route exact path="/movies/top_rated" element={<TopRatedPage />} />
         <Route exact path="/movies/now_playing" element={<NowPlayingPage />} />
         <Route path="/movies/:id" element={<MoviePage />} />
-        <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage/>} />
-        <Route path="/movies/:id/similar" element={<MovieSimilarPage/>} />
-        <Route path="/movies/:id/credits" element={<MovieCreditsPage/>} />
         <Route path="/" element={<HomePage />} />
         <Route path="*" element={ <Navigate to="/" /> } />
-        <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
-        <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
-        
-        <Route path="/person/:id" element={ <PersonPage /> } />
-        <Route path="/person/:id/credits" element={ <PersonCreditsPage /> } />
-
         <Route path="/login" element={ <LoginPage /> } />
-        <Route path="/signup" element={ <CreateAccountPage /> } />
+        <Route path="/signup" element={ <SignUpPage /> } />
+
+        <Route element={<ProtectedRoutes />}>
+          <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage/>} />
+          <Route path="/movies/:id/similar" element={<MovieSimilarPage/>} />
+          <Route path="/movies/:id/credits" element={<MovieCreditsPage/>} />
+
+          <Route path="/person/:id" element={ <PersonPage /> } />
+          <Route path="/person/:id/credits" element={ <PersonCreditsPage /> } />
+          
+          <Route path="/reviews/:id" element={ <MovieReviewPage /> } />
+          <Route path="/reviews/form" element={ <AddMovieReviewPage /> } />
+        </Route>
       </Routes>
       </Suspense>
       </MoviesContextProvider>
