@@ -9,6 +9,7 @@ import ProtectedRoutes from "./protectedRoutes";
 
 import LoginPage from "./pages/loginPage";
 import SignUpPage from "./pages/signUpPage";
+import AuthContextProvider from "./contexts/authContext";
 
 const HomePage = lazy(() => import("./pages/homePage"));
 const MoviePage = lazy(() => import("./pages/movieDetailsPage"));
@@ -43,6 +44,7 @@ const App = () => {
     <BrowserRouter>
       <SiteHeader />
       <MoviesContextProvider>
+        <AuthContextProvider>
       <Suspense fallback={<h1>Loading page</h1>}>
       <Routes>
         <Route exact path="/movies/favorites" element={<FavoriteMoviesPage />} />
@@ -69,6 +71,7 @@ const App = () => {
         </Route>
       </Routes>
       </Suspense>
+      </AuthContextProvider>
       </MoviesContextProvider>
     </BrowserRouter>
     <ReactQueryDevtools initialIsOpen={false} />
