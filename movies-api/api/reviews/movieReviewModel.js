@@ -10,8 +10,12 @@ const MovieReviewSchema = new Schema({
    rating: {type: String},
 })
 
-MovieReviewSchema.statics.findByMovieDBId = function (id) {
-   return this.findOne({ movieId: id });
+MovieReviewSchema.statics.findByReviewId = function (id) {
+   return this.findOne({ reviewId: id });
+ };
+
+ MovieReviewSchema.statics.removeByReviewId = function (id) {
+   return this.deleteOne({ reviewId: id });
  };
  
  export default mongoose.model('MovieReviews', MovieReviewSchema);
