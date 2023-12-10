@@ -64,7 +64,7 @@
   // it seems its because when this is called it puts it inside of an array. 
   export const getMovieReviews = async (id) => {
     return fetch(
-      `http://localhost:8080/api/movies/tmdb/movieReviews/${id}`
+      `http://localhost:8080/api/movies/tmdb/movie/${id}/reviews`
     )
       .then((res) => res.json())
       .then((json) => {
