@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from '../contexts/authContext';
 import { Link } from "react-router-dom";
@@ -8,6 +8,13 @@ const LoginPage = props => {
 
     const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
+    const [loginError, setLoginError] = useState("")
+
+    useEffect(() => {
+        if (context && context.message) {
+            setLoginError(context.message);
+        }
+    }, [context.message]);
 
     const login = () => {
         context.authenticate(userName, password);
@@ -36,6 +43,7 @@ const LoginPage = props => {
             <button onClick={login}>Log in</button>
             <p>Not Registered?
                 <Link to="/signup">Sign Up!</Link></p>
+            <p>{loginError}</p>
         </>
     );
 };

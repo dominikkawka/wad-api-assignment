@@ -19,8 +19,10 @@ A bullet-point list of the ADDITIONAL features you have implemented in the API *
  + `/tmdb/movie/:id/credits`: Get movie credits
  + `/tmdb/person/:id`: Get person id
  + `/tmdb/person/:id/credits`: Get person credits
- + `/tmdb/movie/:id/reviews`: get movie reviews
- + `:id/reviews`: get AND post movie reviews (auth token needed) (WIP)
+ + `/tmdb/movie/:id/reviews`: get movie reviews from TMDB
+ + `reviews`: get/post reviews from/to database
+ + `reviews/:reviewId`: Delete certain review
+ + `reviews/:movieId`: get reviews for certain movie
 
 ## Setup requirements.
 
@@ -54,11 +56,23 @@ If you have your API design on an online platform or graphic, please link to it 
 ## Security and Authentication
 
 Give details of authentication/security implemented on the API (e.g. passport/sessions). Indicate which routes are protected.
+Protected Routes:
++ `/movies/favorites`
++ `/movies/:id/recommendations`   
++ `/movies/:id/similar`
++ `/movies/:id/credits`
++ `/person/:id`
++ `/person/:id/credits`
++ `/reviews/:id`
++ `/reviews/form`
 
 ## Integrating with React App
 
 Describe how you integrated your React app with the API. List the views that use your Web API instead of the TMDB API. Describe any other updates to the React app from Assignment One.
 
+All movie related things (Details,lists,similar,recommendations,credits) are from the TMDB API since this information is updated daily.
+Users can submit reviews, which then can be viewed with the review excerpt, or on the review page.  
+
 ## Independent learning (if relevant)
 
-Briefly explain any non-standard features developed for the app. 
+I followed this [guide](https://stackoverflow.com/questions/34247484/how-to-integrate-swagger-with-my-express-application) to add swaggerUI to this project. 

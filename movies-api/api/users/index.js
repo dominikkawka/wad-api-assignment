@@ -17,6 +17,7 @@ router.post('/', asyncHandler(async (req, res) => {
         if (!req.body.username || !req.body.password) {
             return res.status(400).json({ success: false, msg: 'Username and password are required.' });
         }
+
         if (req.query.action === 'register') {
             await registerUser(req, res);
         } else {
