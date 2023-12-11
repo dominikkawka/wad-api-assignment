@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { AuthContext } from '../contexts/authContext';
 
@@ -10,17 +10,24 @@ const SignUpPage = props => {
   const [registered, setRegistered] = useState(false);
   const [registerError, setRegisterError] = useState("")
 
+  useEffect(() => {
+    if (context && context.message) {
+      setRegisterError(context.message);
+    }
+}, [context.message]);
+
   const register = () => {
    console.log(context) // null
     let passwordRegEx = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     const validPassword = passwordRegEx.test(password);
 
+    
     if (userName.length < 3) {
       setRegisterError("username is too short")
     }
 
     if (!validPassword) {
-      setRegisterError("invalid password")
+      setRegisterError("password is too short")
     }
 
     if (password !== passwordAgain) {

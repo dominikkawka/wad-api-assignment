@@ -8,6 +8,7 @@ const AuthContextProvider = (props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authToken, setAuthToken] = useState(existingToken);
   const [userName, setUserName] = useState("");
+  const [message, setMessage] = useState("")
 
   //Function to put JWT token in local storage.
   const setToken = (data) => {
@@ -22,11 +23,12 @@ const AuthContextProvider = (props) => {
       setIsAuthenticated(true);
       setUserName(username);
     }
+    setMessage(result.msg)
   };
 
   const register = async (username, password) => {
     const result = await signup(username, password);
-    console.log(result.code);
+    console.log(result.msg);
     return (result.code === 201) ? true : false;
   };
 
@@ -41,6 +43,7 @@ const AuthContextProvider = (props) => {
         authenticate,
         register,
         signout,
+        message,
         userName
       }}
     >
