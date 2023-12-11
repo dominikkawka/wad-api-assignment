@@ -14,8 +14,12 @@ MovieReviewSchema.statics.findByReviewId = function (id) {
    return this.findOne({ reviewId: id });
  };
 
- MovieReviewSchema.statics.removeByReviewId = function (id) {
+MovieReviewSchema.statics.removeByReviewId = function (id) {
    return this.deleteOne({ reviewId: id });
  };
  
+MovieReviewSchema.statics.findByMovieId = function (id) {
+  return this.find({ movieId: id });
+};
+
  export default mongoose.model('MovieReviews', MovieReviewSchema);

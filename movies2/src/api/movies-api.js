@@ -1,3 +1,6 @@
+/*
+* LOCAL USER API
+*/
 export const login = async (username, password) => {
    const response = await fetch('http://localhost:8080/api/users', {
        headers: {
@@ -19,3 +22,34 @@ export const signup = async (username, password) => {
    });
    return response.json();
 };
+
+/*
+* LOCAL MOVIE REVIEWS API
+*/
+
+export const getLocalMovieReviews = async (movieId) => {
+    const response = await fetch(`http://localhost:8080/api/reviews/${movieId}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'get',
+    });
+    return response.json();
+ };
+
+ export const postLocalMovieReview = async (movieId, reviewId, author, content, rating) => {
+    const response = await fetch('http://localhost:8080/api/reviews?action=submit', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'post',
+        body: JSON.stringify({ 
+            movieId: movieId, 
+            reviewId: reviewId,
+            author: author,
+            content: content,
+            rating: rating
+        })
+    });
+    return response.json();
+ };

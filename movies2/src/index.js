@@ -42,12 +42,11 @@ const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
     <BrowserRouter>
-      <SiteHeader />
       <MoviesContextProvider>
         <AuthContextProvider>
+        <SiteHeader />
       <Suspense fallback={<h1>Loading page</h1>}>
       <Routes>
-        <Route exact path="/movies/favorites" element={<FavoriteMoviesPage />} />
         <Route exact path="/movies/upcoming" element={<UpcomingPage />} />
         <Route exact path="/movies/popular" element={<PopularPage />} />
         <Route exact path="/movies/top_rated" element={<TopRatedPage />} />
@@ -59,6 +58,8 @@ const App = () => {
         <Route path="/signup" element={ <SignUpPage /> } />
 
         <Route element={<ProtectedRoutes />}>
+          <Route exact path="/movies/favorites" element={<FavoriteMoviesPage />} />
+          
           <Route path="/movies/:id/recommendations" element={<MovieRecommendationsPage/>} />
           <Route path="/movies/:id/similar" element={<MovieSimilarPage/>} />
           <Route path="/movies/:id/credits" element={<MovieCreditsPage/>} />
