@@ -29,6 +29,11 @@ router.delete('/:reviewId', asyncHandler(async (req, res) => {
    deleteReview(req, res)
 }))
 
+router.get('/:movieId', async (req, res) => {
+    const movieReviews = await MovieReview.findByMovieId(req.params.movieId);
+    res.status(200).json(movieReviews);
+});
+
 async function submitReview(req, res) {
     // Add input validation logic here
     await MovieReview.create(req.body);

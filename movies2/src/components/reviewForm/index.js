@@ -9,6 +9,9 @@ import { MoviesContext } from "../../contexts/moviesContext";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
+import { postLocalMovieReview } from "../../api/movies-api";
+import { AuthContext } from "../../contexts/authContext";
+
 
 const ratings = [
   {
@@ -62,6 +65,8 @@ const styles = {
 
 const ReviewForm = ({ movie }) => {
   const context = useContext(MoviesContext);
+  const authContext = useContext(AuthContext);
+
   const [rating, setRating] = useState(3);
   const [open, setOpen] = useState(false); 
   const navigate = useNavigate();
@@ -90,9 +95,13 @@ const ReviewForm = ({ movie }) => {
   };
 
   const onSubmit = (review) => {
-    review.movieId = movie.id;
+    let movieId = movie.id;
+    let reviewId = Math.floor(Math.random() * 1000)
+    let author = review.author
+    let content =  review.review
     review.rating = rating;
-    context.addReview(movie, review);
+    //console.log("movieId: "+movieId+ "reviewId: "+reviewId+"author: "+ author+ "content: "+content+ "rating: "+review.rating)
+    postLocalMovieReview(movieId, reviewId, author, content, rating)
     setOpen(true); 
   };
 
@@ -124,15 +133,16 @@ const ReviewForm = ({ movie }) => {
           name="author"
           control={control}
           rules={{ required: "Name is required" }}
-          defaultValue=""
+          defaultValue={authContext.userName}
           render={({ field: { onChange, value } }) => (
             <TextField
               sx={{ width: "40ch" }}
               variant="outlined"
               margin="normal"
               required
+              disabled
               onChange={onChange}
-              value={value}
+              value={authContext.userName}
               id="author"
               label="Author's name"
               name="author"

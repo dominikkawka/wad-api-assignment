@@ -8,7 +8,7 @@ const ReviewForm = lazy(() => import("../components/reviewForm"));
 
 const WriteReviewPage = (props) => {
   const location = useLocation();
-  const movieId = location.state.movieId;
+  const movieId = location.state && location.state.movieId;
 
   const { data: movie, error, isLoading, isError } = useQuery(
     ["movie", { id: movieId }],
