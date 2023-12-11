@@ -42,6 +42,18 @@ router.put('/:id', async (req, res) => {
     }
 });
 
+// Set favourite movies for user
+router.patch('/:userName', async (req, res) => {
+    const result = await User.updateOne({
+        userName: req.params.userName,
+    }, req.body);
+    if (result.matchedCount) {
+        res.status(200).json({ code:200, msg: 'User Updated Sucessfully' });
+    } else {
+        res.status(404).json({ code: 404, msg: 'Unable to Update User' });
+    }
+});
+
 async function registerUser(req, res) {
     // Add input validation logic here
     await User.create(req.body);

@@ -23,6 +23,17 @@ export const signup = async (username, password) => {
    return response.json();
 };
 
+export const favourites = async (userName, favourites) => {
+    const response = await fetch(`http://localhost:8080/api/users/${userName}`, {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        method: 'patch',
+        body: JSON.stringify({ favourites: favourites })
+    });
+    return response.json();
+ };
+
 /*
 * LOCAL MOVIE REVIEWS API
 */
