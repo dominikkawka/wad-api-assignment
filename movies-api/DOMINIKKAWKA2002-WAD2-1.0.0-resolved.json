@@ -1,0 +1,924 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Movies API",
+    "description": "API to manage local movies",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/DOMINIKKAWKA2002/WAD2/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    },
+    {
+      "url": "http://localhost:8080/api",
+      "description": "Local server"
+    }
+  ],
+  "paths": {
+    "/movies": {
+      "get": {
+        "tags": [
+          "Local Movies"
+        ],
+        "summary": "Get a list of local movies",
+        "responses": {
+          "200": {
+            "description": "A list of movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Movie"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/{id}": {
+      "get": {
+        "tags": [
+          "Local Movies"
+        ],
+        "summary": "Get information about a specific movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/discover/{page}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get page of discover movies",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page number",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of discover movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movie/{id}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get information about a specific movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Information about the movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/genres": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get list of genres",
+        "responses": {
+          "200": {
+            "description": "List of genres",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movieImages/{id}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get movie images for specific movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie images for specific movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movie/{id}/reviews": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get reviews for a specific movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reviews for a specific movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/upcoming/{page}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get page of upcoming movies",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page number",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of upcoming movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/popular/{page}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get page of popular movies",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page number",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of popular movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/topRated/{page}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get page of top rated movies",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page number",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of top rated movies",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/nowPlaying/{page}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get page of movies now playing in cinema",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Page number",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page of movies now playing in cinema",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movie/{id}/recommendations": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get movie recommendations based on movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie recommendations based on movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movie/{id}/similar": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get similar movies based on movie",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Similar movies based on movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/movie/{id}/credits": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get movie credits",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie credits",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/person/{id}": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get actor details",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the person",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Actor details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movies/tmdb/person/{id}/credits": {
+      "get": {
+        "tags": [
+          "TMDB Movies"
+        ],
+        "summary": "Get actor film discography",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the person",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Actor film discography",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movie"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Get a list of local users",
+        "responses": {
+          "200": {
+            "description": "A list of users",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Create and authenticate a new user",
+        "responses": {
+          "200": {
+            "description": "New user created and authenticated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{id}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update user information",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID of the user",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User information updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/users/{userName}": {
+      "post": {
+        "tags": [
+          "Users"
+        ],
+        "summary": "Update favorite movies for user (WIP)",
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "path",
+            "description": "Username of the user",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Favorite movies updated (WIP)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get all local movie reviews",
+        "responses": {
+          "200": {
+            "description": "List of movie reviews",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Post a movie review to the local database",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Review"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Movie review posted to the database",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/reviews/{reviewId}": {
+      "delete": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Delete a movie review from the database based on review ID",
+        "parameters": [
+          {
+            "name": "reviewId",
+            "in": "path",
+            "description": "ID of the review to delete",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Movie review deleted successfully"
+          }
+        }
+      }
+    },
+    "/reviews/{movieId}": {
+      "get": {
+        "tags": [
+          "Reviews"
+        ],
+        "summary": "Get all movie reviews for a certain movie",
+        "parameters": [
+          {
+            "name": "movieId",
+            "in": "path",
+            "description": "ID of the movie",
+            "required": true,
+            "style": "simple",
+            "explode": false,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of reviews for the movie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Review"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Review": {
+        "required": [
+          "movieId",
+          "reviewId"
+        ],
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "description": "ID of the movie"
+          },
+          "reviewId": {
+            "type": "integer",
+            "description": "ID of the review"
+          },
+          "author": {
+            "type": "string",
+            "description": "Author of the review"
+          },
+          "content": {
+            "type": "string",
+            "description": "Review content"
+          },
+          "rating": {
+            "type": "string",
+            "description": "Rating of the movie"
+          }
+        }
+      },
+      "User": {
+        "required": [
+          "password",
+          "username"
+        ],
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "description": "Username of the user"
+          },
+          "password": {
+            "type": "string",
+            "description": "Password of the user"
+          },
+          "favourites": {
+            "type": "array",
+            "description": "Array of user's favorite movies",
+            "items": {
+              "$ref": "#/components/schemas/User_favourites"
+            }
+          }
+        }
+      },
+      "Movie": {
+        "type": "object",
+        "properties": {
+          "adult": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "poster_path": {
+            "type": "string"
+          },
+          "overview": {
+            "type": "string"
+          },
+          "release_date": {
+            "type": "string",
+            "format": "date"
+          },
+          "original_title": {
+            "type": "string"
+          },
+          "genre_ids": {
+            "uniqueItems": true,
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "original_language": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "backdrop_path": {
+            "type": "string"
+          },
+          "popularity": {
+            "type": "number",
+            "format": "double"
+          },
+          "vote_count": {
+            "type": "integer"
+          },
+          "video": {
+            "type": "boolean"
+          },
+          "vote_average": {
+            "type": "number",
+            "format": "double"
+          },
+          "production_countries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Movie_production_countries"
+            }
+          },
+          "runtime": {
+            "type": "integer"
+          },
+          "spoken_languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Movie_spoken_languages"
+            }
+          },
+          "status": {
+            "type": "string"
+          },
+          "tagline": {
+            "type": "string"
+          }
+        }
+      },
+      "User_favourites": {
+        "type": "object",
+        "properties": {
+          "movieId": {
+            "type": "integer",
+            "description": "ID of the movie in favorites"
+          }
+        }
+      },
+      "Movie_production_countries": {
+        "type": "object",
+        "properties": {
+          "iso_3166_1": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Movie_spoken_languages": {
+        "type": "object",
+        "properties": {
+          "iso_639_1": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+}
