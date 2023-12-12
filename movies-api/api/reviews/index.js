@@ -5,6 +5,7 @@ import MovieReview from './movieReviewModel'
 
 const router = express.Router(); // eslint-disable-line
 
+//Fetches all movie reviews
 router.get('/', async (req, res) => {
     const movieReviews = await MovieReview.find();
     res.status(200).json(movieReviews);

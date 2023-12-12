@@ -9,6 +9,10 @@ import { getMovies, getMovie, getGenres, getMovieImages, getMovieReviews,
 
 const router = express.Router();
 
+/*
+*  LOCAL MOVIES 
+*/ 
+
 router.get('/', asyncHandler(async (req, res) => {
     let { page = 1, limit = 10 } = req.query; // destructure page and limit and set default values
     [page, limit] = [+page, +limit]; //trick to convert to numeric (req.query will contain string values)
@@ -39,6 +43,10 @@ router.get('/:id', asyncHandler(async (req, res) => {
         res.status(404).json({message: 'The movie you requested could not be found.', status_code: 404});
     }
 }));
+
+/*
+*  TMDB MOVIES 
+*/ 
 
 router.get('/tmdb/discover/:page', asyncHandler(async (req, res) => {
     const movies = await getMovies(req.params.page);
@@ -110,6 +118,7 @@ router.get('/tmdb/person/:id/credits', asyncHandler(async (req, res) => {
     res.status(200).json(personCredits);
 }));
 
+/*
 router.get('/tmdb/movie/:id/reviews', asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id);
     const movieReview = await movieReviewModel.findByMovieDBId(id);
@@ -119,5 +128,5 @@ router.get('/tmdb/movie/:id/reviews', asyncHandler(async (req, res) => {
         res.status(404).json({message: 'The movie reviews you requested could not be found.', status_code: 404});
     }
 }));
-
+*/
 export default router;

@@ -1,6 +1,7 @@
 # Assignment 2 - Web API.
 
 Name: Dominik Kawka
+(Demo Video)[https://youtu.be/24ychI0-MIM]
 
 ## Features.
 
@@ -44,14 +45,47 @@ secret=YourJWTSecret
 ______________________
 
 ## API Design
-Give an overview of your web API design, perhaps similar to the following: 
+The API routes fall under two categories
+- *Local*: Data which is called from my mongoDB database
+- *TMDB*: Data which is called from The Movie Database
 
-- /api/movies | GET | Gets a list of movies 
-- /api/movies/{movieid} | GET | Gets a single movie 
-- /api/movies/{movieid}/reviews | GET | Get all reviews for movie 
-- /api/movies/{movieid}/reviews | POST | Create a new review for Movie 
+### Movies
+#### Local
+- `localhost:8080/api/movies` | GET | Gets a list of local movies
+- `localhost:8080/api/movies/:id` | GET | Gets information about a specific movie
 
-If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+#### TMDB
+- `localhost:8080/api/movies/tmdb/discover/:page` | GET | gets page of the discover movies
+- `localhost:8080/api/movies/tmdb/movie/:id` | GET | gets information about a specific movie
+- `localhost:8080/api/movies/tmdb/genres` | GET | gets list of genres
+- `localhost:8080/api/movies/tmdb/movieImages/:id` | GET | gets movie images for specific movie
+- `localhost:8080/api/movies/tmdb/movie/:id/reviews` | GET | gets reviews for a specific movie
+- `localhost:8080/api/movies/tmdb/upcoming/:page` | GET | gets page of the upcoming movies
+- `localhost:8080/api/movies/tmdb/popular/:page` | GET | gets page of popular movies
+- `localhost:8080/api/movies/tmdb/topRated/:page` | GET | gets page of top rated movies
+- `localhost:8080/api/movies/tmdb/nowPlaying/:page` | GET | gets  page of movies now playing in cinema
+- `localhost:8080/api/movies/tmdb/movie/:id/recommendations` | GET | get movie recommendations based on movie
+- `localhost:8080/api/movies/tmdb/movie/:id/similar` | GET | get similar movies based on movie
+- `localhost:8080/api/movies/tmdb/movie/:id/credits` | GET | get movie credits
+- `localhost:8080/api/movies/tmdb/person/:id` | GET | get actor details
+- `localhost:8080/api/movies/tmdb/person/:id/credits` | GET | get actor film discography 
+
+### Users
+#### Local
+- `localhost:8080/api/users` | GET | Gets a list of local users
+- `localhost:8080/api/users?action=register` | POST | creates and authenticates new user
+- `localhost:8080/api/users/:id` | POST | Updates user information
+- `localhost:8080/api/users/:userName` | POST | Updates favourite movies for user (WIP)
+### Reviews
+#### Local
+- `localhost:8080/api/reviews` | GET | get all local movie reviews
+- `localhost:8080/api/reviews?action=submit` | POST | post movie review to local database
+- `localhost:8080/api/reviews/:reviewId` | DELETE | Delete movie review from database based on review Id
+- `localhost:8080/api/reviews/:movieId` | GET | get all movie reviews for certain movie
+
+The swagger layout may not be available by the time this is looked at, either my subscription will expire or you're not invited as a collaborator, as I set the documentation to private. The swagger documentation is showcased in the video, and is saved as `DOMINIKKAWKA2002-WAD2-1.0.0-resolved` in the movies-api directory. 
+
+[Swaggerhub](https://app.swaggerhub.com/apis/DOMINIKKAWKA2002/WAD2/1.0.0).
 
 ## Security and Authentication
 
@@ -73,6 +107,12 @@ Describe how you integrated your React app with the API. List the views that use
 All movie related things (Details,lists,similar,recommendations,credits) are from the TMDB API since this information is updated daily.
 Users can submit reviews, which then can be viewed with the review excerpt, or on the review page.  
 
+Pages that use local API:
+- `addMovieReviewPage.js`
+- `loginPage.js`
+- `movieReviewPage.js`
+- `signUpPage.js`
+- `siteHeader component`
+
 ## Independent learning (if relevant)
 
-I followed this [guide](https://stackoverflow.com/questions/34247484/how-to-integrate-swagger-with-my-express-application) to add swaggerUI to this project. 
